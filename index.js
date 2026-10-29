@@ -5,7 +5,7 @@ const app = express()
 const PORT = 5000
 
 import { MongoClient } from 'mongodb';
-const client = new MongoClient("mongodb://SportNest:ckkqhZpmuvXkQRqT@ac-t13ctfu-shard-00-00.0jmuayl.mongodb.net:27017,ac-t13ctfu-shard-00-01.0jmuayl.mongodb.net:27017,ac-t13ctfu-shard-00-02.0jmuayl.mongodb.net:27017/?ssl=true&replicaSet=atlas-eo5819-shard-0&authSource=admin");
+const client = new MongoClient(process.env.MONGO_URI);
 export async function connectToMongoDB() {
   try {
     await client.connect();
