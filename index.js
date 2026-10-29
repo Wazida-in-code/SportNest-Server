@@ -4,6 +4,19 @@ import 'dotenv/config'
 const app = express()
 const PORT = 5000
 
+import { MongoClient } from 'mongodb';
+const client = new MongoClient("mongodb://SportNest:ckkqhZpmuvXkQRqT@ac-t13ctfu-shard-00-00.0jmuayl.mongodb.net:27017,ac-t13ctfu-shard-00-01.0jmuayl.mongodb.net:27017,ac-t13ctfu-shard-00-02.0jmuayl.mongodb.net:27017/?ssl=true&replicaSet=atlas-eo5819-shard-0&authSource=admin");
+export async function connectToMongoDB() {
+  try {
+    await client.connect();
+    console.log("You successfully connected to MongoDB!");
+    return client;
+  } catch (err) {
+    console.dir(err);
+  }
+}
+
+
 app.get('/', (req, res) => {
     res.send({msg: "Server is running perfectly"})
 })
