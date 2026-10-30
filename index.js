@@ -23,6 +23,7 @@ export async function connectToMongoDB() {
 const connectClient = await connectToMongoDB()
 const db = connectClient.db('SportNest')
 const facilitiesCollection = db.collection('facilities')
+const facilitiesBookingCollection = db.collection('facilitiesBooking')
 
 app.post('/facilities', async(req, res) => {
     const facilityData = req.body
@@ -30,6 +31,14 @@ app.post('/facilities', async(req, res) => {
     console.log(result);
     res.send(result)
 })
+
+
+app.post('/facilities/booking', async(req, res) => {
+  const bookingData = req.body
+  const result = await facilitiesBookingCollection.insertOne(bookingData)
+  res.send(result)
+})
+
 
 app.get('/facilities/:id', async(req, res) =>{
   const {id} = req.params
